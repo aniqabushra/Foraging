@@ -82,7 +82,8 @@ public class Controller {
         Panel panel = view.selectId(panels);
         if (panel != null) {
             PanelResult result = service.delete(panel.getID());
-            view.printResult(result, "Panel %s-%s-%s updated.%n");
+            result.setPayload(panel);
+            view.printResult(result, "Panel %s-%s-%s is removed.%n");
         }
     }
 
