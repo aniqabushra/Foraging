@@ -80,6 +80,7 @@ public class View {
     }
 
     public Panel readPanelSection(List<Panel> panels) {
+        printPanels(panels);
         boolean inputValidation = false;
         do {
             System.out.print("Section Name: ");
