@@ -49,26 +49,18 @@ class PanelServiceTest {
         assertEquals(1, result.getMessages().size());
 
     }
-   /* @Test
+    @Test
     void ShouldNotAddDuplicate_row_col_sec() throws DataAcessException {
         //1, sec1,1,1,2010,MULTICRYSTALLINE_SILICON,false
-        Panel panel = new Panel(3,"test" ,1,2,2010, SolarMateriel.MULTICRYSTALLINE_SILICON,false);
-        PanelResult expected = new PanelResult();
+        Panel panel = new Panel(3,"test" ,1,2,2010, PanelMateriel.MULTICRYSTALLINE_SILICON,"no");
         PanelResult actual = service.add(panel);
-        assertEquals(expected.getMessages().size()==1, actual);
+        assertTrue(actual.getMessages().size()==1);
+        assertEquals("The combined values of Section, Row, and Column may not be duplicated.",actual.getMessages().get(0));
     }
-    //how to check for duplicate
-    private PanelResult makeResult(String message) {
-        PanelResult result = new PanelResult();
-        result.addErrorMessage(message);
-        return result;
-    }*/
     @Test
     void ShouldUpdateExixting() throws DataAcessException {
-        PanelResult result=service.update(new Panel(1,"Updated sec1" ,2,1,2010, PanelMateriel.MULTICRYSTALLINE_SILICON,"yes"));
+        PanelResult result=service.update(new Panel(1,"test" ,1,2,2010, PanelMateriel.MULTICRYSTALLINE_SILICON,"yes"));
         assertTrue(result.isSuccess());
-
-
     }
     @Test
     void ShouldNotUpdateExixting() throws DataAcessException {

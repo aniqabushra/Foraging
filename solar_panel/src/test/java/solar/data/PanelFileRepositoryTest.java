@@ -23,9 +23,7 @@ class PanelFileRepositoryTest {
         //happen every single time
     void setup() throws IOException {
         Files.copy(Paths.get(SEED_PATH), Paths.get(TEST_PATH),
-                StandardCopyOption.REPLACE_EXISTING);
-
-    }
+                StandardCopyOption.REPLACE_EXISTING); }
     @Test
     void ShouldfindAllFivePanels() throws DataAcessException {
         List<Panel> actual=repository.findAll();

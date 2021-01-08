@@ -152,7 +152,7 @@ public class PanelFileRepository implements PanelRepository {
     }
 
     private String Serialize(Panel panel) {
-        return String.format("%s, %s,%s,%s,%s,%s,%s",
+        return String.format("%s,%s,%s,%s,%s,%s,%s",
                 panel.getID(),
                 panel.getSection(),
                 panel.getRow(),

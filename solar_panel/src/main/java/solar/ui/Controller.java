@@ -22,10 +22,11 @@ public class Controller {
         MenuOption option;
         do {
             option = view.displayMenuOptionsAndSelect();
-            System.out.println(option.getTitle());
+           //Todo us a method instead of sout
+            view.printMessage(option.getTitle());
             switch (option) {
                 case EXIT:
-                    System.out.println("Good Bye :)");
+                    view.printMessage("Good Bye :)");
                     break;
                 case FIND_PANEL_BY_SECTION:
                     displayBySections();
@@ -49,8 +50,8 @@ public class Controller {
 
     private void displayBySections() throws DataAcessException {
         view.printHeader(MenuOption.FIND_PANEL_BY_SECTION.getTitle());
-        List<Panel> panel = service.findAll();
-        Panel secName = view.readPanelSection(panel);
+        List<Panel> panels = service.findAll();
+        view.displayPanelsInSection(panels);
     }
 
     private void addPanel() throws DataAcessException {

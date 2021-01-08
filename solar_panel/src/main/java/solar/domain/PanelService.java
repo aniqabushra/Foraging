@@ -70,12 +70,14 @@ public class PanelService {
         //Combined value of sec row and col should not be duplicate
         List<Panel> panels = findAll();
         for (Panel p : panels) {
-            if (Objects.equals(panel.getSection(), p.getSection())
-                    && Objects.equals(panel.getRow(), p.getRow())
-                    && Objects.equals(panel.getCol(), p.getCol())) {
-                result.addErrorMessage("The combined values of Section, Row, and Column may not be duplicated.");
-                return result;
-            }
+                if (p.getID() != panel.getID() && Objects.equals(panel.getSection(), p.getSection())
+                        && Objects.equals(panel.getRow(), p.getRow())
+                        && Objects.equals(panel.getCol(), p.getCol())) {
+                    result.addErrorMessage("The combined values of Section, Row, and Column may not be duplicated.");
+                    return result;
+                }
+
+
         }
 
 

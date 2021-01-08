@@ -79,36 +79,32 @@ public class View {
         return result;
     }
 
-    public Panel readPanelSection(List<Panel> panels) {
+    public void displayPanelsInSection(List<Panel> panels) {
         printPanels(panels);
-        boolean inputValidation = false;
-        do {
-            System.out.print("Section Name: ");
-            String secInput = console.nextLine();
-            System.out.println();
-            System.out.printf("Panels in %s%n", secInput);
+        String secInput = readRequiredString("Section Name: ");
+        System.out.println();
+        System.out.printf("Panels in %s%n", secInput);
 
-            if (panels.size() == 0) {
-                System.out.println("No Panel Found");
+        if (panels.size() == 0) {
+            System.out.println("No Panel Found");
 
-            } else {
-                System.out.println("Row,Col,Year,Materiel,IsTracking");
-                for (Panel p : panels) {
-                    if (p.getSection().equalsIgnoreCase(secInput)) {
-                        System.out.printf("%s, %s, %s, %s, %s %n", p.getRow(), p.getCol(), p.getYear(), p.getMateriel(), p.getTracking());
-                        inputValidation = true;
-                    } /*else if (!p.getSection().equalsIgnoreCase(secInput)) {
-                        System.out.println("No section is found");
-                        break;
-                    }*/
+        } else {
+            List<Panel> panelsToDisplay=new ArrayList<>();
+            for(Panel p:panels){
+                if (p.getSection().equalsIgnoreCase(secInput)) {
+                    panelsToDisplay.add(p);
                 }
-                System.out.println("No section is found");
-
             }
-        } while (!inputValidation);
-
-
-        return null;
+            if(panelsToDisplay.size()>0){
+                System.out.println("Row,Col,Year,Materiel,IsTracking");
+                for(Panel p : panelsToDisplay){
+                    System.out.printf("%s, %s, %s, %s, %s %n", p.getRow(), p.getCol(), p.getYear(), p.getMateriel(), p.getTracking());
+                }
+            }
+            else{
+                System.out.println("No panels found.");
+            }
+        }
     }
 
     public PanelMateriel readMateriel(String prompt) {
@@ -203,9 +199,19 @@ public class View {
         updateSection(panel);
         updateCol(panel);
         updaterow(panel);
+        updateYear(panel);
         updateMateriel(panel);
         updateTracking(panel);
         return panel;
+    }
+
+    private void updateSection(Panel panel) {
+        String section = readString("Section to update( " + panel.getSection() + "):");
+        if (section.trim().length() > 0) {
+            panel.setSection(section);
+        } else if (section.length() == 0) {
+            panel.setSection(panel.getSection());
+        }
     }
 
     private void updaterow(Panel panel) {
@@ -220,34 +226,25 @@ public class View {
         if (col > 0 || col <= 250) {
             panel.setCol(col);
         }
-    }
+    }private void updateYear(Panel panel) {
+        int year=readYear("Year ("+ panel.getYear() + "):");
 
-    private void updateSection(Panel panel) {
-        String section = readString("Section ( " + panel.getSection() + "):");
-        if (section.trim().length() > 0) {
-            panel.setSection(section);
-        } else if (section.length() == 0) {
-            panel.setSection(panel.getSection());
-        }
     }
+    //put update year
 
     private void updateMateriel(Panel panel) {
-        PanelMateriel materiel = readMateriel("Materiel ( " + panel.getMateriel() + "):");
+        PanelMateriel materiel = readMateriel("Materiel to update ( " + panel.getMateriel() + "):");
         if (materiel != null) {
             panel.setMateriel(materiel);
         }
     }
 
     private void updateTracking(Panel panel) {
-        String tracking = readString("Tracking ( " + panel.getTracking() + "):");
+        String tracking = readString("Tracking[yes/no] to update(" + panel.getTracking() + "):");
         if (tracking.trim().length() > 0) {
-            panel.setSection(tracking);
+            panel.setTracking(tracking);
         }
 
-    }
-
-    public Panel deletePanel(Panel panel) {
-        return null;
     }
 
     public Panel selectId(List<Panel> panels) {
