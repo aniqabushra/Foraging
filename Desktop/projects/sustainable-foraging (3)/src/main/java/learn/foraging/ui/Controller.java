@@ -64,12 +64,10 @@ public class Controller {
                     addItem();
                     break;
                 case REPORT_KG_PER_ITEM:
-                    view.displayStatus(false, "NOT IMPLEMENTED");
-                    view.enterToContinue();
+                    reportKgPerItem();
                     break;
                 case REPORT_CATEGORY_VALUE:
-                    view.displayStatus(false, "NOT IMPLEMENTED");
-                    view.enterToContinue();
+                    reportCategoryValue();
                     break;
                 case GENERATE:
                     generate();
@@ -77,7 +75,19 @@ public class Controller {
             }
         } while (option != MainMenuOption.EXIT);
     }
-//Todo New Code
+
+    private void reportKgPerItem() {
+        LocalDate date = view.getForageDate();
+        List<Forage> forages = forageService.findByDate(date);
+        List<Integer> item=itemService.ForgeItem(date);
+    }
+
+    private void reportCategoryValue() {
+        LocalDate date = view.getForageDate();
+        List<Forage> forages = forageService.findByDate(date);
+    }
+
+    //Todo New Code
     private void viewForagers() {
         view.displayHeader(MainMenuOption.VIEW_FORAGER.getMessage());
         getForager();

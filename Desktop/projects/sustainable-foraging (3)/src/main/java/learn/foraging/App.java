@@ -17,22 +17,7 @@ import org.springframework.context.annotation.ComponentScan;
 public class App {
     public static void main(String[] args) {
 
-      /*  ConsoleIO io = new ConsoleIO();
-        View view = new View(io);
-
-        ForageFileRepository forageFileRepository = new ForageFileRepository("./data/forage_data");
-        ForagerFileRepository foragerFileRepository = new ForagerFileRepository("./data/foragers.csv");
-        ItemFileRepository itemFileRepository = new ItemFileRepository("./data/items.txt");
-
-        ForagerService foragerService = new ForagerService(foragerFileRepository);
-        ForageService forageService = new ForageService(forageFileRepository, foragerFileRepository, itemFileRepository);
-        ItemService itemService = new ItemService(itemFileRepository);
-
-        Controller controller = new Controller(foragerService, forageService, itemService, view);
-        controller.run();*/
         ApplicationContext context = new AnnotationConfigApplicationContext(App.class);
-
-        // 3. The context works the same as the XML context.
         Controller controller = context.getBean(Controller.class);
         // Run the app!
         controller.run();

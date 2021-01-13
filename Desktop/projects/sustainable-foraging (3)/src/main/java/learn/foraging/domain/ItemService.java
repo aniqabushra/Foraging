@@ -1,21 +1,27 @@
 package learn.foraging.domain;
 
 import learn.foraging.data.DataException;
+import learn.foraging.data.ForageRepository;
 import learn.foraging.data.ItemRepository;
 import learn.foraging.models.Category;
+import learn.foraging.models.Forage;
 import learn.foraging.models.Item;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 @Service
 public class ItemService {
 
     private final ItemRepository repository;
+     public ForageRepository forageRepository;
 
     public ItemService(ItemRepository repository) {
         this.repository = repository;
+        //this.forageRepository = forageRepository;
     }
 
     public List<Item> findByCategory(Category category) {
@@ -55,4 +61,18 @@ public class ItemService {
         return result;
     }
     //Write to ForgeItem method
+    public List<Integer> ForgeItem(LocalDate date){
+        //Map<Integer,Item> itemMap
+        return repository.findAll()
+                .stream()
+                .map(Item::getId)
+                .collect(Collectors.toList());
+                //.collect(Collectors.m(Item::getId,item -> item));
+
+        //I need to to a transform but how?
+
+       // List<Forage> result=forageRepository.findByDate(date);
+
+
+    }
 }

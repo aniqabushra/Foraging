@@ -26,7 +26,7 @@ public class ForagerService {
                 .filter(i -> i.getLastName().startsWith(prefix))
                 .collect(Collectors.toList());
     }
-
+                //new code
     public Result addForager(Forager forager) throws DataException {
         //two types of validation input validation or domain validation
         //input validation

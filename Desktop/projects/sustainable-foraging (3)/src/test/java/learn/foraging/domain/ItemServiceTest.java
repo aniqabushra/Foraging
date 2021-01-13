@@ -1,19 +1,27 @@
 package learn.foraging.domain;
 
-import learn.foraging.data.DataException;
-import learn.foraging.data.ItemRepositoryDouble;
+import learn.foraging.data.*;
 import learn.foraging.models.Category;
+import learn.foraging.models.Forage;
 import learn.foraging.models.Item;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Date;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ItemServiceTest {
+    /*
+    ForageService service = new ForageService(
+            new ForageRepositoryDouble(),
+            new ForagerRepositoryDouble(),
+            new ItemRepositoryDouble());
+     */
 
     ItemService service = new ItemService(new ItemRepositoryDouble());
-
     @Test
     void shouldNotSaveNullName() throws DataException {
         Item item = new Item(0, null, Category.EDIBLE, new BigDecimal("5.00"));
